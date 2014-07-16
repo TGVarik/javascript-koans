@@ -7,7 +7,7 @@ var _; //globals
  */
 describe("About Higher Order Functions", function () {
 
-  it("should use filter to return array items that meet a criteria", function () {
+  it("should use 'filter' to return array items that meet a criterion", function () {
     var numbers = [1,2,3];
     var odd = _(numbers).filter(function (x) { return x % 2 !== 0 });
     
@@ -61,7 +61,7 @@ describe("About Higher Order Functions", function () {
     expect(_(mixedBag).all(isEven)).toBe(FILL_ME_IN);
   });
     
-  it("should use 'any' to test if any items passes condition" , function () {
+  it("should use 'any' to test if any items pass condition" , function () {
     var onlyEven = [2,4,6];
     var mixedBag = [2,4,5,6];
 
@@ -71,17 +71,17 @@ describe("About Higher Order Functions", function () {
     expect(_(mixedBag).any(isEven)).toBe(FILL_ME_IN);
   });
 
-  it("should use range to generate an array", function() {
+  it("should use 'range' to generate an array", function() {
     expect(_.range(3)).toEqual(FILL_ME_IN);
     expect(_.range(1, 4)).toEqual(FILL_ME_IN);
     expect(_.range(0, -4, -1)).toEqual(FILL_ME_IN);
   });
 
-  it("should use flatten to make nested arrays easy to work with", function() {
+  it("should use 'flatten' to make nested arrays easy to work with", function() {
     expect(_([ [1, 2], [3, 4] ]).flatten()).toEqual(FILL_ME_IN);
   });
 
-  it("should use chain() ... .value() to use multiple higher order functions", function() {
+  it("should use 'chain() ... .value()' to use multiple higher order functions", function() {
     var result = _([ [0, 1], 2 ]).chain()
                      .flatten()
                      .map(function(x) { return x+1 } )
