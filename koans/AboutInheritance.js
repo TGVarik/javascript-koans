@@ -47,7 +47,7 @@ Object.prototype.beget = function () {
   function F() {}
   F.prototype = this;
   return new F();
-}
+};
 
 function Gonzo(age, hobby, trick) {
   Muppet.call(this, age, hobby);
