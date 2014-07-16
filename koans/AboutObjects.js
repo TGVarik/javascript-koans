@@ -36,7 +36,7 @@ describe("About Objects", function () {
     var currentDate = new Date();
     var currentYear = (currentDate.getFullYear());
     var megalomaniac = { 
-      mastermind: "James Wood", 
+      mastermind: "James Woods",
       henchman: "Adam West",
       birthYear: 1970,
       calculateAge: function () {
