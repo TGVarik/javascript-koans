@@ -106,16 +106,57 @@ describe("About Applying What We Have Learnt", function() {
                  }, ingredientCount)
                  .value();
 
-    expect(ingredientCount['mushrooms']).toBe(2);
+    expect(ingredientCount.mushrooms).toBe(2);
   });
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
-  
-  });
 
+  it('should find the largest prime factor of a composite number', function() {
+    //TODO: implement a more efficient algorithm, e.g., Pollard-Strassen
+
+    var primeSieve = function(n) {
+      var numbers = _.range(2, Math.floor(Math.sqrt(n)) + 1);
+      for (var index = 0; index < numbers.length; index++) {
+        if (numbers[index] === undefined) {
+          break;
+        }
+        numbers = numbers.filter(function(candidate) {
+          return candidate === numbers[index] || candidate % numbers[index] !== 0;
+        });
+      }
+      // n may have at most one prime factor > √n, so find the next prime and include it
+      var isNotPrime = function(x) {
+        // a for loop might be cheaper
+        return _(numbers).any(function(prime) {
+          return x % prime === 0;
+        });
+      };
+      // _.last() might be cheaper
+      var i = _(numbers).max();
+      while (isNotPrime(i)) {
+        i++;
+      }
+      numbers.push(i);
+      return numbers;
+    };
+
+    /* An alternative approach would be to iterate backwards through the array of primes
+     * until reaching one that evenly divides n. Intuitively this should be faster, but
+     * it was substantially slower during testing. Perhaps the test was flawed?
+     */
+    var largestPrime = function(n) {
+      var primes = primeSieve(n);
+      // Chaining caused extremely long run times. Why?
+      var primeFactors = primes.filter(function(p) {
+        return n % p === 0;
+      });
+      // _.last() might be cheaper
+      return primeFactors.length === 0 ? n : _(primeFactors).max();
+    };
+    expect(largestPrime(Math.pow(2, 15) - 1)).toBe(151);
+  });
+  /*
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
     
   });
@@ -132,5 +173,5 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the 10001st prime", function () {
 
   });
-  */
+ */
 });
