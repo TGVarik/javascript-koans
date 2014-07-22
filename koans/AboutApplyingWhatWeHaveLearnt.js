@@ -169,9 +169,24 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the difference between the sum of the squares and the square of the sums", function () {
     
   });
-
-  it("should find the 10001st prime", function () {
-
-  });
  */
+  it('should find the 10001st prime', function() {
+    // Using a variation on the 'next prime' sequence in primeSieve above
+    var p = function(n) {
+      var primes = [];
+      var i = 2;
+      while (primes.length < n) {
+        if (_(primes).every(function(prime) {
+          return i % prime !== 0;
+        })) {
+          primes.push(i);
+        }
+        i++;
+      }
+      return _(primes).last();
+    };
+    // runs in 2.76 seconds
+    expect(p(10001)).toBe(104743);
+  });
+
 });
