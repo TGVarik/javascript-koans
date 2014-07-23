@@ -191,11 +191,20 @@ describe("About Applying What We Have Learnt", function() {
     expect(result).toBe(232792560);
 
   });
- /*
-  it("should find the difference between the sum of the squares and the square of the sums", function () {
-    
+
+  it("should find the difference between the sum of the squares and the square of the sums", function() {
+    var diff = function(list) {
+      return Math.abs(list.map(function(i) {
+        return i * i;
+      }).reduce(function(memo, i) {
+        return memo + i;
+      }, 0) - Math.pow(list.reduce(function(memo, i) {
+        return memo + i;
+      }, 0), 2));
+    };
+    expect(diff(_.range(1, 11))).toBe(2640);
   });
- */
+
   it('should find the 10001st prime', function() {
     // Using a variation on the 'next prime' sequence in primeSieve above
     var p = function(n) {
