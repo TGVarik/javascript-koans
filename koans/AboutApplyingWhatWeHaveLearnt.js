@@ -119,6 +119,7 @@ describe("About Applying What We Have Learnt", function() {
       var numbers = _.range(2, Math.floor(Math.sqrt(n)) + 1);
       for (var index = 0; index < numbers.length; index++) {
         if (numbers[index] === undefined) {
+          console.log('Hit the brakes!');
           break;
         }
         numbers = numbers.filter(function(candidate) {
@@ -160,12 +161,37 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
     
   });
+ */
+  it('should find the smallest number divisible by each of the numbers 1 to 20', function() {
+    // least common multiple
+    var divisors = _.range(1, 20);
+    var result = 1;
+    var i = 2;
+    var isNotOne = function(d) {
+      return d !== 1;
+    };
+    var divides = function(i) {
+      return function(d) {
+        return d % i === 0;
+      };
+    };
+    var divideIfDivisible = function(i) {
+      return function(d) {
+        return d % i === 0 ? d / i : d;
+      };
+    };
+    while (_(divisors).any(isNotOne)) {
+      while (_(divisors).any(divides(i))) {
+        result = result * i;
+        divisors = divisors.map(divideIfDivisible(i));
+      }
+      i++;
+    }
 
-  it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
-    
+    expect(result).toBe(232792560);
+
   });
-
+ /*
   it("should find the difference between the sum of the squares and the square of the sums", function () {
     
   });
