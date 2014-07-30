@@ -157,11 +157,31 @@ describe("About Applying What We Have Learnt", function() {
     };
     expect(largestPrime(Math.pow(2, 15) - 1)).toBe(151);
   });
-  /*
-  it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
+
+  it("should find the largest palindrome made from the product of two 3 digit numbers", function() {
+
+    var isPalindrome = function(n) {
+      n = n.toString();
+      var compareLength = Math.floor(n.length / 2);
+      return n.slice(0, compareLength) === n.slice(-compareLength).split("").reverse().join("");
+    };
+
+    // #TODO Replace this very naive and slow approach. There ought to be a better way...
+    var biggestPalindrome = function() {
+      var candidates = [];
+      _.each(_.range(100, 1000), function(n) {
+        _.each(_.range(100, 1000), function(m) {
+          candidates.push(n * m);
+        });
+      });
+      candidates = _(candidates).uniq();
+      candidates = _(candidates).filter(isPalindrome);
+      return _(candidates).max();
+    };
     
+    expect(biggestPalindrome()).toBe(906609);
   });
- */
+
   it('should find the smallest number divisible by each of the numbers 1 to 20', function() {
     // least common multiple
     var divisors = _.range(1, 20);
