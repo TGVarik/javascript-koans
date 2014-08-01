@@ -165,27 +165,29 @@ describe("About Applying What We Have Learnt", function() {
       return n === n.split("").reverse().join("");
     };
 
+    // A detailed explanation of this approach is here: http://wopsr.net/palindromes
     var findBiggest = function() {
       var allProducts = [];
       var start, end, step;
       for (var n = 101; n < 1000; n++) {
-        if (n % 10) {
-          if (n % 11) {
+        if (n % 10) {                         // skip multiples of 10
+          if (n % 11) {                       // if n isn't a multiple of 11, m must be
             start = 11 * Math.ceil(n / 11);
             end = 11 * Math.floor(1000 / 11);
             step = 11;
-          } else {
+          } else {                            // if n is a multiple of 11, m needn't be
             start = n;
             end = 1000;
             step = 1;
           }
         }
         for (var m = start; m < end; m += step) {
-          if (m % 10) {
+          if (m % 10) {                       // skip multiples of 10
             allProducts.push(m * n);
           }
         }
       }
+      // allProducts.length = 55764, 93.1% shorter than the naïve approach
       var palindromes = allProducts.filter(isPalindrome);
       return Math.max.apply(null, palindromes);
     };
