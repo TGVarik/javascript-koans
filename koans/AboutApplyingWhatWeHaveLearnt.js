@@ -162,24 +162,34 @@ describe("About Applying What We Have Learnt", function() {
 
     var isPalindrome = function(n) {
       n = n.toString();
-      var compareLength = Math.floor(n.length / 2);
-      return n.slice(0, compareLength) === n.slice(-compareLength).split("").reverse().join("");
+      return n === n.split("").reverse().join("");
     };
 
-    // #TODO Replace this very naive and slow approach. There ought to be a better way...
-    var biggestPalindrome = function() {
-      var candidates = [];
-      _.each(_.range(100, 1000), function(n) {
-        _.each(_.range(100, 1000), function(m) {
-          candidates.push(n * m);
-        });
-      });
-      candidates = _(candidates).uniq();
-      candidates = _(candidates).filter(isPalindrome);
-      return _(candidates).max();
+    var findBiggest = function() {
+      var allProducts = [];
+      var start, end, step;
+      for (var n = 101; n < 1000; n++) {
+        if (n % 10) {
+          if (n % 11) {
+            start = 11 * Math.ceil(n / 11);
+            end = 11 * Math.floor(1000 / 11);
+            step = 11;
+          } else {
+            start = n;
+            end = 1000;
+            step = 1;
+          }
+        }
+        for (var m = start; m < end; m += step) {
+          if (m % 10) {
+            allProducts.push(m * n);
+          }
+        }
+      }
+      var palindromes = allProducts.filter(isPalindrome);
+      return Math.max.apply(null, palindromes);
     };
-    
-    expect(biggestPalindrome()).toBe(906609);
+    expect(findBiggest()).toBe(906609);
   });
 
   it('should find the smallest number divisible by each of the numbers 1 to 20', function() {
